@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>RotaLeitura</title>
+
+<link rel="manifest" href="manifest.json">
+
+<meta name="theme-color" content="#031D44">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="RotaLeitura">
+
+<link rel="icon" type="image/png" sizes="192x192" href="app/assets/launchericon-192x192.png">
+<link rel="apple-touch-icon" href="app/assets/launchericon-192x192.png">
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<link rel="stylesheet"
+href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"/>
+
+<link rel="stylesheet"
+href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
+
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="./app/css/app.css">
+
+</head>
+<body>
+
+<div id="loadingTela" class="loadingTela oculto">
+
+<div class="loader"></div>
+
+<div class="loadingTexto">
+Carregando...
+</div>
+
+</div>
+
+<div id="offlineAviso" class="statusOffline oculto">
+📡 Funcionando Offline
+</div>
+
+<div id="loginTela">
+
+<div class="topo">
+<div class="logo">RotaLeitura</div>
+<div class="sub">Inteligência em campo</div>
+</div>
+
+<div class="container">
+<div class="card">
+
+<input type="email" id="email" placeholder="Email">
+
+<input type="password" id="senha" placeholder="Senha">
+
+<button class="botao" onclick="fazerLogin()">
+ENTRAR
+</button>
+
+</div>
+</div>
+
+</div>
+
+<div id="appTela" class="oculto">
+
+<div class="topo">
+<div class="logo">RotaLeitura</div>
+<div class="sub">Inteligência em campo</div>
+</div>
+
+<div class="abas">
+
+<button class="aba ativa" id="btnBusca" onclick="abrirAba('busca')">
+BUSCA
+</button>
+
+<button class="aba" id="btnMapa" onclick="abrirAba('mapa')">
+MAPA
+</button>
+
+</div>
+
+<div id="abaBusca" class="container">
+
+<select id="area"></select>
+
+<input list="listaMRUs" id="mru" placeholder="Digite ou selecione a MRU">
+<datalist id="listaMRUs"></datalist>
+
+<input type="text" id="busca" placeholder="Buscar instalação, medidor ou cliente">
+
+<div id="statusOfflineCard" class="card oculto"></div>
+
+<div id="resultados"></div>
+
+</div>
+
+<div id="abaMapa" class="container oculto">
+
+<select id="areaMapa"></select>
+
+<input list="listaMRUsMapa" id="mruMapa" placeholder="Digite ou selecione a MRU">
+<datalist id="listaMRUsMapa"></datalist>
+
+<button class="botao" onclick="carregarMapa()">
+EXIBIR MAPA
+</button>
+
+<div id="map"></div>
+
+</div>
+
+<div class="container">
+<button class="botao logout" onclick="logout()">
+SAIR
+</button>
+</div>
+
+</div>
+
+<script type="module" src="./app/main.js"></script>
+
+</body>
+</html>
