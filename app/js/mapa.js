@@ -560,13 +560,6 @@ watchId = null;
 
 }
 
-export function invalidarMapa(){
-
-if(map){
-map.invalidateSize();
-}
-
-}
 if(map){
 
 map.remove();
@@ -581,6 +574,14 @@ if(mapaDiv){
 
 mapaDiv.innerHTML = '';
 
+}
+
+}
+
+export function invalidarMapa(){
+
+if(map){
+map.invalidateSize();
 }
 
 }
