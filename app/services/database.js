@@ -1,5 +1,11 @@
 import { lerAreaOffline } from './offline.js';
 import { normalizar } from '../utils/normalizar.js';
+import {
+  listarAreas as sqliteListarAreas,
+  listarMRUs as sqliteListarMRUs,
+  buscarInstalacoes as sqliteBuscarInstalacoes,
+  listarInstalacoesMapa as sqliteListarInstalacoesMapa
+} from './sqlite.js';
 
 function obterDadosDaArea(cache){
 
@@ -35,17 +41,9 @@ async function obterCacheDaArea(area){
 export async function listarAreas(){
 
   try{
-    const response = await fetch('./database/indexes.json');
-
-    if(!response.ok){
-      return [];
-    }
-
-    const indexes = await response.json();
-
-    return Object.keys(indexes).sort();
-
-  }catch{
+    return await sqliteListarAreas();
+  }catch(e){
+    console.warn('SQLite listarAreas falhou:', e);
     return [];
   }
 
@@ -60,6 +58,12 @@ export async function areaOfflineDisponivel(area){
 
 export async function listarMRUs(area){
 
+  try{
+    return await sqliteListarMRUs(area);
+  }catch(e){
+    console.warn('SQLite listarMRUs falhou:', e);
+  }
+
   const cache = await obterCacheDaArea(area);
   const dados = obterDadosDaArea(cache);
 
@@ -72,6 +76,12 @@ export async function listarMRUs(area){
 }
 
 export async function buscarInstalacoes(area, mru='', texto=''){
+
+  try{
+    return await sqliteBuscarInstalacoes(area, mru, texto);
+  }catch(e){
+    console.warn('SQLite buscarInstalacoes falhou:', e);
+  }
 
   const cache = await obterCacheDaArea(area);
 
@@ -101,6 +111,12 @@ export async function buscarInstalacoes(area, mru='', texto=''){
 }
 
 export async function listarInstalacoesMapa(area, mru=''){
+
+  try{
+    return await sqliteListarInstalacoesMapa(area, mru);
+  }catch(e){
+    console.warn('SQLite listarInstalacoesMapa falhou:', e);
+  }
 
   const cache = await obterCacheDaArea(area);
 
